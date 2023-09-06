@@ -1,0 +1,20 @@
+.container {
+    width: 20%;
+    height: 100%;
+    border-right: 3px solid #dddddd;
+
+}
+
+.container header {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.container nav ul{
+    list-style: none;
+
+}
+
+.container nav ul li{
+    padding: 1rem 2rem;
+}
