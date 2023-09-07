@@ -2,6 +2,12 @@ import { Switch, useMantineColorScheme } from "@mantine/core";
 
 import styles from "./SideNav.module.css";
 import MantineThemeButton from "./MantineThemeButton";
+import {
+  IconChartArea,
+  IconChartLine,
+  IconWind,
+  IconTable,
+} from "@tabler/icons-react";
 
 function SideNav({ toggleView, isActive }) {
   const { colorScheme } = useMantineColorScheme();
@@ -24,6 +30,7 @@ function SideNav({ toggleView, isActive }) {
               }}
               className={isActive === "Comparative" ? styles.active : ""}
             >
+              <IconChartArea />
               Comparative
             </li>
             <li
@@ -32,6 +39,7 @@ function SideNav({ toggleView, isActive }) {
               }}
               className={isActive === "Overlay" ? styles.active : ""}
             >
+              <IconChartLine />
               Overlay
             </li>
             <li
@@ -40,6 +48,7 @@ function SideNav({ toggleView, isActive }) {
               }}
               className={isActive === "Wind" ? styles.active : ""}
             >
+              <IconWind />
               Wind
             </li>
             <li
@@ -48,6 +57,7 @@ function SideNav({ toggleView, isActive }) {
               }}
               className={isActive === "Table" ? styles.active : ""}
             >
+              <IconTable />
               Table
             </li>
           </ul>
