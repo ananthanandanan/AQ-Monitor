@@ -6,13 +6,19 @@
     align-items: center;
     border-bottom: #dddddd 1px solid;
     padding: 0rem 3rem;
+    border-radius: 0px 10px 0px 0px;
 }
 
 .left-items {
-    font-size: small;
+    font-size: large;
 }
 
 .right-items {
     display: flex;
     gap: 1rem;
+}
+
+.container.dark {
+    background-color: var(--accent-lighter-black);
+    color: #dddddd;
 }

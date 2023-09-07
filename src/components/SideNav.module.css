@@ -3,6 +3,7 @@
     height: 100%;
     border-right: 3px solid #dddddd;
     box-shadow: 5px 0px 20px 0px rgb(224, 221, 221);
+    border-radius: 10px 0px 0px 10px;
 
 }
 
@@ -49,3 +50,17 @@
 
 }
 
+.container.dark {
+    background-color: var(--accent-lighter-black);
+    color: #dddddd;
+    border-right: 0px;
+}
+
+.dark nav ul li:hover{
+    background-color: var(--accent-purple);
+}
+
+.dark nav ul li:active{
+    background-color: var(--accent-purple);
+    font-weight: bold;
+}
