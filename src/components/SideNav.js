@@ -3,8 +3,9 @@ import { Switch, useMantineColorScheme } from "@mantine/core";
 import styles from "./SideNav.module.css";
 import MantineThemeButton from "./MantineThemeButton";
 
-function SideNav() {
+function SideNav({ toggleView, isActive }) {
   const { colorScheme } = useMantineColorScheme();
+
   return (
     <aside
       className={`${styles.container} ${
@@ -17,10 +18,38 @@ function SideNav() {
             <h2>AQ Monitor</h2>
           </header>
           <ul>
-            <li>Comparative</li>
-            <li>Overlay</li>
-            <li>Wind</li>
-            <li>Table</li>
+            <li
+              onClick={() => {
+                toggleView("Comparative");
+              }}
+              className={isActive === "Comparative" ? styles.active : ""}
+            >
+              Comparative
+            </li>
+            <li
+              onClick={() => {
+                toggleView("Overlay");
+              }}
+              className={isActive === "Overlay" ? styles.active : ""}
+            >
+              Overlay
+            </li>
+            <li
+              onClick={() => {
+                toggleView("Wind");
+              }}
+              className={isActive === "Wind" ? styles.active : ""}
+            >
+              Wind
+            </li>
+            <li
+              onClick={() => {
+                toggleView("Table");
+              }}
+              className={isActive === "Table" ? styles.active : ""}
+            >
+              Table
+            </li>
           </ul>
         </div>
         <div className={styles["bottom-items"]}>
