@@ -1,9 +1,16 @@
+import { Switch, useMantineColorScheme } from "@mantine/core";
+
 import styles from "./SideNav.module.css";
-import { Switch } from "@mantine/core";
+import MantineThemeButton from "./MantineThemeButton";
 
 function SideNav() {
+  const { colorScheme } = useMantineColorScheme();
   return (
-    <aside className={styles.container}>
+    <aside
+      className={`${styles.container} ${
+        colorScheme === "dark" ? styles.dark : ""
+      }`}
+    >
       <nav>
         <div className={styles["top-items"]}>
           <header>
@@ -27,13 +34,8 @@ function SideNav() {
             <p>Dataset</p>
           </div>
           <div>
-            <Switch
-              styles={{ trackLabel: { fontSize: 15 } }}
-              onLabel="1"
-              offLabel="2"
-              size="md"
-            />
-            <p>Dataset</p>
+            <MantineThemeButton />
+            <p>{colorScheme === "dark" ? "Dark" : "Light"} Mode</p>
           </div>
         </div>
       </nav>

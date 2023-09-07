@@ -1,10 +1,22 @@
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;700&display=swap');
+
+
 :root {
-  --primary-black: rgb(16,19,27);
-  --accent-purple: rgb(80,48,229);
-  --accent-black: rgb(22,29,42);
-  --accent-light-black: rgb(26,33,47);
+  font-family: 'Open Sans', 'Lato', sans-serif;
+--primary-black: #101113;
+--accent-purple: rgb(80,48,229);
+--accent-black: #141517;
+--accent-light-black: #1A1B1E;
+--accent-lighter-black:#25262B
 
 
+}
+
+main {
+  width: 100%;
+  height: 100%;
 }
 
 .App {

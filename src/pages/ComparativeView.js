@@ -7,8 +7,9 @@ import { ActionIcon } from "@mantine/core";
 import { TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 
-import Nav from "../components/Nav";
+import Header from "../components/Header";
 import ComparativeTabs from "../components/ComparativeTabs";
+import ChartCard from "../components/ChartCard";
 
 function ComparativeView() {
   const startTimeInputRef = useRef();
@@ -16,7 +17,7 @@ function ComparativeView() {
 
   return (
     <>
-      <Nav title="Comparative View">
+      <Header title="Comparative View">
         <TimeInput
           size="xs"
           label="Start time"
@@ -37,8 +38,11 @@ function ComparativeView() {
             </ActionIcon>
           }
         />
-      </Nav>
+      </Header>
       <ComparativeTabs />
+      <main>
+        <ChartCard title="Comparative Card" />
+      </main>
     </>
   );
 }
