@@ -1,7 +1,6 @@
 .container {
     width: 85%;
     height: 80%;
-    box-shadow: 5px 0px 20px 0px rgba(143, 141, 141, 0.28);
     z-index: 10;
     margin: 3rem 4rem;
     display: flex;
@@ -15,6 +14,11 @@
     height: 100%;
     padding: 1rem;
 
+}
+
+.dark {
+    background-color: var(--card-black);
+    color: #dddddd;
 }
 
 

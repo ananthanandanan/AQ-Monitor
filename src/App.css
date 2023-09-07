@@ -5,11 +5,10 @@
 
 :root {
   font-family: 'Open Sans', 'Lato', sans-serif;
---primary-black: #101113;
---accent-purple: rgb(80,48,229);
---accent-black: #141517;
---accent-light-black: #1A1B1E;
---accent-lighter-black:#25262B
+  --primary-black: #25262B;
+  --card-black: #2e2f33;
+  --nav-black: #2C2E33;
+  --accent-purple: #6741d9; 
 
 
 }

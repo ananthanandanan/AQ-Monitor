@@ -1,39 +1,26 @@
 // Showing a line graph of wind speed and direction
 // Show the date and day of the week.
 
-import { useRef } from "react";
-import { ActionIcon } from "@mantine/core";
-import { TimeInput } from "@mantine/dates";
-import { IconClock } from "@tabler/icons-react";
-
+import { DateInput } from "@mantine/dates";
+import { Button } from "@mantine/core";
+import { useState } from "react";
 import Header from "../components/Header";
 
 function WindyView() {
-  const startTimeInputRef = useRef();
-  const endTimeInputRef = useRef();
+  const [value, setValue] = useState(null);
   return (
     <>
       <Header title="Windy View">
-        <TimeInput
-          size="xs"
-          label="Start time"
-          ref={startTimeInputRef}
-          rightSection={
-            <ActionIcon onClick={() => startTimeInputRef.current.showPicker()}>
-              <IconClock size="1rem" stroke={1.5} />
-            </ActionIcon>
-          }
+        <DateInput
+          clearable
+          valueFormat="DD/MM/YYYY HH:mm:ss"
+          placeholder="Date input"
+          value={value}
+          onChange={(value) => setValue(value)}
         />
-        <TimeInput
-          size="xs"
-          label="End time"
-          ref={endTimeInputRef}
-          rightSection={
-            <ActionIcon onClick={() => endTimeInputRef.current.showPicker()}>
-              <IconClock size="1rem" stroke={1.5} />
-            </ActionIcon>
-          }
-        />
+        <Button variant="light" color="violet" radius="md">
+          Filter
+        </Button>
       </Header>
       <main>
         {/* <ChartCard title="Comparative Card" /> */}

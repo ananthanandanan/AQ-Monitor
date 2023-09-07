@@ -16,6 +16,6 @@
 }
 
 .content.dark {
-    background-color: var(--accent-lighter-black);
+    background-color: var(--primary-black);
     color: #dddddd;
 }
