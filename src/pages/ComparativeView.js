@@ -11,6 +11,7 @@ import { Button } from "@mantine/core";
 import Header from "../components/Header";
 import ComparativeTabs from "../components/ComparativeTabs";
 import ChartCard from "../components/ChartCard";
+import VisualChart from "../components/VisualChart";
 
 function ComparativeView() {
   const startTimeInputRef = useRef();
@@ -48,7 +49,9 @@ function ComparativeView() {
       </Header>
       <ComparativeTabs />
       <main>
-        <ChartCard title="Comparative Card" />
+        <ChartCard title="Comparative Card">
+          <VisualChart />
+        </ChartCard>
       </main>
     </>
   );

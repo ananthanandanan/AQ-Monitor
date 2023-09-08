@@ -1,4 +1,3 @@
-// import { readFile } from "fs";
 import axios from "axios";
 
 import { praanActions } from "./praan-slice";
