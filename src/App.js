@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
 import "./App.css";
 
@@ -7,8 +8,10 @@ import ComparativeView from "./pages/ComparativeView";
 import OverlayView from "./pages/OverlayView";
 import WindView from "./pages/WindView";
 import TableView from "./pages/TableView";
+import { getPraanData } from "./store/praan-actions";
 
 function App() {
+  const dispatch = useDispatch();
   const [colorScheme, setColorScheme] = useState("dark");
   const [isActive, setIsActive] = useState("Comparative"); // ["Comparative", "Overlay", "Wind", "Table"]
   const toggleColorScheme = (value) =>
@@ -16,6 +19,10 @@ function App() {
   const toggleViewHandler = (view) => {
     setIsActive(view);
   };
+
+  useEffect(() => {
+    dispatch(getPraanData("praan-1"));
+  }, [dispatch]);
 
   return (
     <div className="App">
