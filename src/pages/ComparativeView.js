@@ -2,55 +2,72 @@
 //  Title on left - rigth filter - p1, p2.5, p10, filter - day picker
 //
 
-import { useRef } from "react";
-import { ActionIcon } from "@mantine/core";
-import { TimeInput } from "@mantine/dates";
-import { IconClock } from "@tabler/icons-react";
-import { Button } from "@mantine/core";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import Header from "../components/Header";
+import Filters from "../components/Filters";
 import ComparativeTabs from "../components/ComparativeTabs";
 import ChartCard from "../components/ChartCard";
 import VisualChart from "../components/VisualChart";
+import { praanActions } from "../store/praan-slice";
 
 function ComparativeView() {
-  const startTimeInputRef = useRef();
-  const endTimeInputRef = useRef();
+  const dispatch = useDispatch();
+  const [tab, setTab] = useState("p1");
+  const {
+    uniqueDevices,
+    timeData,
+    data: praanData,
+  } = useSelector((state) => state.praan.praanModel);
+  const deviceValues = useSelector((state) => state.praan.filteredDevices);
+
+  const comparativeData = uniqueDevices.map((device) => {
+    const filteredData = [];
+    const filteredDeviceValues = deviceValues.filter(
+      (item) => item.device === device
+    );
+
+    filteredDeviceValues.forEach((item) => {
+      const { device: itemDevice, key } = item;
+      let time = new Date(timeData[key].time);
+
+      if (itemDevice === device) {
+        filteredData.push({
+          x: time.getTime(),
+          y: praanData[key][tab],
+        });
+      }
+    });
+
+    return {
+      name: device,
+      data: filteredData,
+    };
+  });
+
+  const filterTimeHandler = (dateTimeData) => {
+    dispatch(praanActions.filterWithTime(dateTimeData));
+  };
 
   return (
     <>
       <Header title="Comparative View">
-        <TimeInput
-          size="xs"
-          label="Start time"
-          ref={startTimeInputRef}
-          rightSection={
-            <ActionIcon onClick={() => startTimeInputRef.current.showPicker()}>
-              <IconClock size="1rem" stroke={1.5} />
-            </ActionIcon>
-          }
+        <Filters
+          onFilter={filterTimeHandler}
+          filterTime
+          filterDate
+          // defaultDate={defaultDateTimeValue}
         />
-        <TimeInput
-          size="xs"
-          label="End time"
-          ref={endTimeInputRef}
-          rightSection={
-            <ActionIcon onClick={() => endTimeInputRef.current.showPicker()}>
-              <IconClock size="1rem" stroke={1.5} />
-            </ActionIcon>
-          }
-        />
-        <Button variant="light" color="violet" radius="md">
-          Filter
-        </Button>
-        <Button variant="outline" color="violet" radius="md">
-          Clear
-        </Button>
       </Header>
-      <ComparativeTabs />
+      <ComparativeTabs
+        toggleTabs={(newTabs) => {
+          setTab(newTabs);
+        }}
+      />
       <main>
         <ChartCard title="Comparative Card">
-          <VisualChart />
+          {comparativeData && <VisualChart chartData={comparativeData} />}
         </ChartCard>
       </main>
     </>

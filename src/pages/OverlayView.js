@@ -5,6 +5,8 @@ import { TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 
 import Header from "../components/Header";
+import ChartCard from "../components/ChartCard";
+import OverlayChart from "../components/OverlayChart";
 
 function OverlayView() {
   const startTimeInputRef = useRef();
@@ -40,8 +42,9 @@ function OverlayView() {
         </Button>
       </Header>
       <main>
-        {/* <ChartCard title="Comparative Card" /> */}
-        <h1>Hello This is overlay</h1>
+        <ChartCard title="Comparative Card">
+          <OverlayChart />
+        </ChartCard>
       </main>
     </>
   );

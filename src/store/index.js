@@ -5,6 +5,10 @@ const store = configureStore({
   reducer: {
     praan: praanSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;
