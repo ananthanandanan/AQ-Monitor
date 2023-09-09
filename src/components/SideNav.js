@@ -4,6 +4,15 @@ import styles from "./SideNav.module.css";
 import MantineThemeButton from "./MantineThemeButton";
 import { IconChartArea, IconChartLine, IconWind } from "@tabler/icons-react";
 
+/**
+ * SideNav is a component that is used to display the side nav for all views.
+ * @param {Object} props
+ * @param {string} props.isActive - The active view
+ * @param {function} props.toggleView - Function to toggle the view
+ * @param {function} props.toggleDataset - Function to toggle the dataset
+ * @returns {JSX.Element}
+ *
+ */
 function SideNav({ toggleView, isActive, toggleDataset }) {
   const { colorScheme } = useMantineColorScheme();
 

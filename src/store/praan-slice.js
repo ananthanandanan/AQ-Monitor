@@ -62,7 +62,6 @@ const praanSlice = createSlice({
       }
       if (type === "FILTER_DATE_AND_TIME") {
         const { date, startTime, endTime } = action.payload;
-        console.log(date, startTime, endTime);
         state.praanModel.timeData.forEach((item) => {
           let time = new Date(item.time);
           if (

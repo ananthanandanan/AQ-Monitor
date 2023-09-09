@@ -6,6 +6,20 @@ import { Button } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { format } from "date-fns";
 
+/**
+ * Filters is a component that is used to display the filters for Date and Time.
+ *
+ * @param {Object} props
+ * @param {boolean} props.filterTime - Whether to display the time filter or not
+ * @param {boolean} props.filterDate - Whether to display the date filter or not
+ * @param {function} props.onFilter - Function to filter the data
+ * @param {function} props.onClear - Function to clear the filter
+ * @param {boolean} props.isWeekly - Whether to display the weekly filter or not
+ *
+ * @returns {JSX.Element}
+ *
+ */
+
 function Filters({ filterTime, filterDate, onFilter, onClear, isWeekly }) {
   const startTimeInputRef = useRef();
   const endTimeInputRef = useRef();
@@ -34,9 +48,6 @@ function Filters({ filterTime, filterDate, onFilter, onClear, isWeekly }) {
       // combine onFormattedDate and startTime
       const startTimeDate = new Date(`${onFormattedDate}T${startTime}`);
       const endTimeDate = new Date(`${onFormattedDate}T${endTime}`);
-
-      //
-      console.log("THe date ", onFormattedDate, startTimeDate, endTimeDate);
 
       onFilter({
         type: "FILTER_DATE_AND_TIME",

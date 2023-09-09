@@ -1,5 +1,12 @@
 import { Tabs } from "@mantine/core";
 
+/**
+ * ComparativeTabs is a component that is used to display the comparative tabs for the comparative view.
+ * @param {Object} props
+ * @param {function} props.toggleTabs - Function to toggle the tabs
+ * @returns {JSX.Element}
+ *
+ */
 function ComparativeTabs({ toggleTabs }) {
   return (
     <Tabs defaultValue="P1" inverted color="violet" variant="pills">

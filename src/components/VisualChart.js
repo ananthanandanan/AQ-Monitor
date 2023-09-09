@@ -1,6 +1,15 @@
 import Chart from "react-apexcharts";
 import { useMantineColorScheme } from "@mantine/core";
 
+/**
+ * VisualChart is a component that uses the ApexCharts library to display charts, depending on the view.
+ * @param {Object} props
+ * @param {Object} props.chartData - The data for the chart
+ * @param {boolean} props.isWind - Whether the chart is for wind or not
+ *
+ * @returns {JSX.Element}
+ *
+ */
 function VisualChart({ chartData, isWind }) {
   const { colorScheme } = useMantineColorScheme();
   const isDark = colorScheme === "dark";

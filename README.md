@@ -1,6 +1,6 @@
 # AQ-Monitor: Air Quality Monitoring Dashboard 🌬️📊
 
-AQ-Monitor is a data visualization dashboard built using **ReactJS**, **Mantine**, **ApexCharts**, and **Redux Toolkit** to monitor air quality data collected from Praan devices installed in the real world. This dashboard provides an intuitive interface to analyze and explore air quality measurements, including PM1, PM2.5, and PM10 particle concentrations, wind speed, wind direction, and more.
+AQ-Monitor is a data visualization dashboard built using **ReactJS**, **Mantine**, **ApexCharts**, and **Redux Toolkit** to monitor air quality data collected from Praan devices installed in the real world. This dashboard provides an intuitive interface to analyze and explore air quality measurements, including PM1, PM2.5, and PM10 particle concentrations, wind speed.
 
 ## Features 🚀
 
@@ -11,6 +11,8 @@ AQ-Monitor is a data visualization dashboard built using **ReactJS**, **Mantine*
 - **Time-Series Graph:** View a time-series graph that overlays PM readings (PM1, PM2.5, and PM10) on top of each other for comprehensive analysis.
 
 - **Dark Mode:** Toggle between light and dark modes for comfortable viewing in different lighting environments.
+
+- **Dataset Switching:** Switch between different datasets to view the same data in different ways.
 
 ## Project Setup 🛠️
 
@@ -41,3 +43,8 @@ AQ-Monitor is a data visualization dashboard built using **ReactJS**, **Mantine*
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Data Sources 📊
+
+- Using the Original Dataset, prepared two mock datasets for the visualisation of the dashboard.
+- The data is hosted on firebase `realtime database`.

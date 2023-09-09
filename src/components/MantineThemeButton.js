@@ -5,7 +5,11 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { IconSun, IconMoonStars } from "@tabler/icons-react";
-
+/**
+ * MantineThemeButton is a component that is used to display the theme button.
+ * @returns {JSX.Element}
+ *
+ */
 function MantineThemeButton() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const theme = useMantineTheme();

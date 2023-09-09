@@ -10,6 +10,12 @@ import Filters from "../components/Filters";
 import { praanActions } from "../store/praan-slice";
 import VisualChart from "../components/VisualChart";
 
+/**
+ * WindyView is a page that displays the wind speed for the week.
+ *
+ * @returns {JSX.Element}
+ *
+ */
 function WindyView() {
   const dispatch = useDispatch();
   const [date, setDate] = useState();

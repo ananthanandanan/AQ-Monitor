@@ -1,10 +1,10 @@
 
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;700&display=swap');
 
 
 :root {
-  font-family: 'Open Sans', 'Lato', sans-serif;
+  font-family: 'Poppins', sans-serif;
   --primary-black: #25262B;
   --card-black: #2e2f33;
   --nav-black: #2C2E33;

@@ -1,6 +1,15 @@
 import { useMantineColorScheme } from "@mantine/core";
 import styles from "./Header.module.css";
 
+/**
+ * Header is a component that is used to display the header for all views.
+ * @param {Object} props
+ * @param {string} props.title - The title of the view
+ * @param {JSX.Element} props.children - The filters for the view
+ *
+ * @returns {JSX.Element}
+ *
+ */
 function Header({ title, children: filters }) {
   // Left items: Title of view
   // Right items: Filter

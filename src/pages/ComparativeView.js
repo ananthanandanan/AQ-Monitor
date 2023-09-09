@@ -1,7 +1,3 @@
-// Nav slider for the comparative view
-//  Title on left - rigth filter - p1, p2.5, p10, filter - day picker
-//
-
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -11,6 +7,13 @@ import ComparativeTabs from "../components/ComparativeTabs";
 import ChartCard from "../components/ChartCard";
 import VisualChart from "../components/VisualChart";
 import { praanActions } from "../store/praan-slice";
+
+/**
+ * ComparativeView is a page that displays the comparison between difference devices, for different PM values selected.
+ *
+ * @returns {JSX.Element}
+ *
+ */
 
 function ComparativeView() {
   const dispatch = useDispatch();
@@ -32,6 +35,7 @@ function ComparativeView() {
       const { device: itemDevice, key } = item;
       let time = new Date(timeData[key].time);
 
+      // If the device is the same as the one we are filtering for, then add it to the filtered data
       if (itemDevice === device) {
         filteredData.push({
           x: time.getTime(),
@@ -46,10 +50,12 @@ function ComparativeView() {
     };
   });
 
+  // Filter the data based on the time selected
   const filterTimeHandler = (dateTimeData) => {
     dispatch(praanActions.filterWithTime(dateTimeData));
   };
 
+  // Clear the filter
   const onClearHandler = () => {
     dispatch(praanActions.clearFilter());
   };
