@@ -57,7 +57,10 @@ export function getPraanData(dataset) {
     let Res;
     try {
       Res = await axios.get(
-        process.env.REACT_APP_DATASET1_URL + "/" + dataset + ".json"
+        "https://aq-monitor-d3dc2-default-rtdb.asia-southeast1.firebasedatabase.app" +
+          "/" +
+          dataset +
+          ".json"
       );
 
       dispatch(praanActions.fetchPraanData(Res.data));
