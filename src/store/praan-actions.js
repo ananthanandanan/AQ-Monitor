@@ -57,7 +57,7 @@ export function getPraanData(dataset) {
     let Res;
     try {
       Res = await axios.get(
-        process.env.REACT_APP_DATASET1_URL + dataset + ".json"
+        process.env.REACT_APP_DATASET1_URL + "/" + dataset + ".json"
       );
 
       dispatch(praanActions.fetchPraanData(Res.data));
