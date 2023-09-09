@@ -50,6 +50,10 @@ function ComparativeView() {
     dispatch(praanActions.filterWithTime(dateTimeData));
   };
 
+  const onClearHandler = () => {
+    dispatch(praanActions.clearFilter());
+  };
+
   return (
     <>
       <Header title="Comparative View">
@@ -57,7 +61,7 @@ function ComparativeView() {
           onFilter={filterTimeHandler}
           filterTime
           filterDate
-          // defaultDate={defaultDateTimeValue}
+          onClear={onClearHandler}
         />
       </Header>
       <ComparativeTabs

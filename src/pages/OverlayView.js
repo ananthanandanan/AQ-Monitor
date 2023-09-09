@@ -1,49 +1,57 @@
 // Title left, filter - time range,
-import { useRef } from "react";
-import { ActionIcon, Button } from "@mantine/core";
-import { TimeInput } from "@mantine/dates";
-import { IconClock } from "@tabler/icons-react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../components/Header";
 import ChartCard from "../components/ChartCard";
-import OverlayChart from "../components/OverlayChart";
+import Filters from "../components/Filters";
+import VisualChart from "../components/VisualChart";
+import { praanActions } from "../store/praan-slice";
 
 function OverlayView() {
-  const startTimeInputRef = useRef();
-  const endTimeInputRef = useRef();
+  const dispatch = useDispatch();
+  const { data: praanData } = useSelector((state) => state.praan.praanModel);
+  const timeValues = useSelector((state) => state.praan.filteredTimes);
+
+  const overlayData = ["p1", "p2_5", "p10"].map((particle) => {
+    let filteredData = [];
+
+    timeValues.forEach((item) => {
+      const { time: itemTime, key } = item;
+      let time = new Date(itemTime);
+
+      filteredData.push({
+        x: time.getTime(),
+        y: praanData[key][particle],
+      });
+    });
+
+    return {
+      name: particle,
+      data: filteredData,
+    };
+  });
+
+  const filterTimeHandler = (dateTimeData) => {
+    dispatch(praanActions.filterWithTime(dateTimeData));
+  };
+
+  const onClearHandler = () => {
+    dispatch(praanActions.clearFilter());
+  };
+
   return (
     <>
       <Header title="Overlay View">
-        <TimeInput
-          size="xs"
-          label="Start time"
-          ref={startTimeInputRef}
-          rightSection={
-            <ActionIcon onClick={() => startTimeInputRef.current.showPicker()}>
-              <IconClock size="1rem" stroke={1.5} />
-            </ActionIcon>
-          }
+        <Filters
+          filterDate
+          filterTime
+          onFilter={filterTimeHandler}
+          onClear={onClearHandler}
         />
-        <TimeInput
-          size="xs"
-          label="End time"
-          ref={endTimeInputRef}
-          rightSection={
-            <ActionIcon onClick={() => endTimeInputRef.current.showPicker()}>
-              <IconClock size="1rem" stroke={1.5} />
-            </ActionIcon>
-          }
-        />
-        <Button variant="light" color="violet" radius="md">
-          Filter
-        </Button>
-        <Button variant="outline" color="violet" radius="md">
-          Clear
-        </Button>
       </Header>
       <main>
         <ChartCard title="Comparative Card">
-          <OverlayChart />
+          {overlayData && <VisualChart chartData={overlayData} />}
         </ChartCard>
       </main>
     </>

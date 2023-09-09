@@ -10,7 +10,11 @@ function BasicLayout(props) {
 
   return (
     <div className={styles.container}>
-      <SideNav toggleView={props.toggleView} isActive={props.isActive} />
+      <SideNav
+        toggleView={props.toggleView}
+        isActive={props.isActive}
+        toggleDataset={props.toggleDataset}
+      />
       <div className={`${styles.content} ${isDark ? styles.dark : ""}`}>
         {props.children}
       </div>

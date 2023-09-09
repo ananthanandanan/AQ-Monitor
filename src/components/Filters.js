@@ -4,14 +4,18 @@ import { TimeInput } from "@mantine/dates";
 import { IconClock } from "@tabler/icons-react";
 import { Button } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 
-function Filters({ filterTime, filterDate, onFilter, onClear, defaultDate }) {
+function Filters({ filterTime, filterDate, onFilter, onClear, isWeekly }) {
   const startTimeInputRef = useRef();
   const endTimeInputRef = useRef();
   const [dateValue, setDateValue] = useState();
 
   const onfilterTime = () => {
+    if (isWeekly) {
+      onFilter({ type: "FILTER_DATE", date: dateValue });
+      return;
+    }
     let startTime = startTimeInputRef.current.value;
     let endTime = endTimeInputRef.current.value;
     startTime = startTime ? startTimeInputRef.current.value : "00:00";
@@ -41,6 +45,13 @@ function Filters({ filterTime, filterDate, onFilter, onClear, defaultDate }) {
         endTime: endTimeDate.getTime(),
       });
     }
+  };
+
+  const onClearTimeFilter = () => {
+    setDateValue(null);
+    startTimeInputRef.current.value = null;
+    endTimeInputRef.current.value = null;
+    onClear();
   };
   return (
     <>
@@ -83,7 +94,12 @@ function Filters({ filterTime, filterDate, onFilter, onClear, defaultDate }) {
       <Button onClick={onfilterTime} variant="light" color="violet" radius="md">
         Filter
       </Button>
-      <Button onClick={onClear} variant="outline" color="violet" radius="md">
+      <Button
+        onClick={onClearTimeFilter}
+        variant="outline"
+        color="violet"
+        radius="md"
+      >
         Clear
       </Button>
     </>

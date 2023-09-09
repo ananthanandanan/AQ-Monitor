@@ -97,6 +97,26 @@ const praanSlice = createSlice({
       state.filteredTimes = updatedTimes;
       state.filteredDevices = updatedDevices;
     },
+    filterWeek(state, action) {
+      const { startDate, endDate } = action.payload;
+      const updatedTimes = [];
+      const updatedDevices = [];
+      state.praanModel.timeData.forEach((item) => {
+        let time = new Date(item.time);
+
+        if (time >= startDate && time <= endDate) {
+          updatedTimes.push(item);
+          updatedDevices.push(state.praanModel.deviceData[item.key]);
+        }
+      });
+
+      state.filteredTimes = updatedTimes;
+      state.filteredDevices = updatedDevices;
+    },
+    clearFilter(state, action) {
+      state.filteredTimes = state.praanModel.timeData;
+      state.filteredDevices = state.praanModel.deviceData;
+    },
   },
 });
 

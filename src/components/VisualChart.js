@@ -5,7 +5,7 @@ import Chart from "react-apexcharts";
 
 import styles from "./VisualChart.module.css";
 
-function VisualChart({ chartData }) {
+function VisualChart({ chartData, isWind }) {
   // Initialize default date (e.g.,d the first date in praanData)
   // const defaultDate = praanData.length > 0 ? praanData[0].t : null;
 
@@ -32,32 +32,62 @@ function VisualChart({ chartData }) {
 
   // // Define options for the chart
   // console.log(chartData,chartData1);
-  console.log(chartData);
-  const options = {
-    chart: {
-      type: "line",
-      stacked: false,
-    },
-    xaxis: {
-      type: "datetime", // Use datetime type for x-axis
-      labels: {
-        formatter: (value) => {
-          const date = new Date(value);
-          return `${date.getHours()}:${date.getMinutes()}`;
+  // console.log(chartData);
+  let options = {};
+  let data = [];
+  if (isWind) {
+    options = {
+      chart: {
+        type: "bar",
+        stacked: false,
+      },
+      xaxis: {
+        categories: chartData.x,
+      },
+      yaxis: {
+        title: {
+          text: "Wind Speed",
         },
       },
-    },
-    yaxis: {
-      title: {
-        text: "PM1 Values",
+    };
+    data = {
+      name: "Wind Speed",
+      data: chartData.y,
+    };
+  } else {
+    options = {
+      chart: {
+        type: "line",
+        stacked: false,
       },
-    },
-  };
+      xaxis: {
+        type: "datetime", // Use datetime type for x-axis
+        labels: {
+          formatter: (value) => {
+            const date = new Date(value);
+            return `${date.getHours()}:${date.getMinutes()}`;
+          },
+        },
+      },
+      yaxis: {
+        title: {
+          text: "PM1 Values",
+        },
+      },
+    };
+    data = chartData;
+  }
 
   return (
     <div className={styles["container"]}>
       {/* Chart */}
-      <Chart options={options} series={chartData} type="line" width="600" />
+      <Chart
+        options={options}
+        series={data}
+        type="line"
+        width="800"
+        height="400"
+      />
     </div>
   );
 }
