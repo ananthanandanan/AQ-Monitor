@@ -1,36 +1,12 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import { useMantineColorScheme } from "@mantine/core";
 
 import styles from "./VisualChart.module.css";
 
 function VisualChart({ chartData, isWind }) {
-  // Initialize default date (e.g.,d the first date in praanData)
-  // const defaultDate = praanData.length > 0 ? praanData[0].t : null;
-
-  // // Set up state to manage the selected date
-  // const [selectedDate, setSelectedDate] = useState(defaultDate);
-
-  // // Filter data for the selected date
-  // const filteredData = praanData.filter(
-  //   (item) =>
-  //     // Adjust the date comparison logic as needed (e.g., comparing date part only)
-  //     item.t &&
-  //     selectedDate &&
-  //     item.t.toDateString() === selectedDate.toDateString()
-  // );
-
-  // Create data for the chart
-  // const chartData1 = Object.keys(deviceFilter).map((device) => ({
-  //   name: `Device ${device}`,
-  //   data: filteredData.map((item, index) => ({
-  //     x: item.t.getTime(), // Use Unix timestamp for x-axis
-  //     y: pValues.p1[deviceFilter[device][index]], // Use p1 values for the selected date
-  //   })),
-  // }));
-
-  // // Define options for the chart
-  // console.log(chartData,chartData1);
-  // console.log(chartData);
+  const { colorScheme } = useMantineColorScheme();
+  const isDark = colorScheme === "dark";
   let options = {};
   let data = [];
   if (isWind) {
@@ -54,10 +30,21 @@ function VisualChart({ chartData, isWind }) {
     };
   } else {
     options = {
+      theme: {
+        mode: isDark ? "dark" : "light",
+        palette: "palette1",
+        monochrome: {
+          enabled: false,
+          color: "#255aee",
+          shadeTo: "light",
+          shadeIntensity: 0.65,
+        },
+      },
       chart: {
         type: "line",
         stacked: false,
       },
+
       xaxis: {
         type: "datetime", // Use datetime type for x-axis
         labels: {
@@ -83,8 +70,8 @@ function VisualChart({ chartData, isWind }) {
         options={options}
         series={data}
         type="line"
-        width="800"
-        height="400"
+        width="850"
+        height="550"
       />
     </div>
   );

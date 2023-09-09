@@ -76,24 +76,6 @@ const praanSlice = createSlice({
         });
       }
 
-      // if (type === "FILTER_TIME") {
-      //   const { startTime, endTime } = action.payload;
-      //   let defaultDate = new Date(
-      //     state.praanModel.timeData[0].time
-      //   ).toDateString();
-      //   state.praanModel.timeData.forEach((item) => {
-      //     let time = new Date(item.time);
-      //     if (
-      //       item.time.toDateString() === defaultDate &&
-      //       time.getTime() >= startTime &&
-      //       time.getTime() <= endTime
-      //     ) {
-      //       updatedTimes.push(item);
-      //       updatedDevices.push(state.praanModel.deviceData[item.key]);
-      //     }
-      //   });
-      // }
-
       state.filteredTimes = updatedTimes;
       state.filteredDevices = updatedDevices;
     },
