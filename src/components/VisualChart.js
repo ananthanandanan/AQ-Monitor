@@ -56,7 +56,7 @@ function VisualChart({ chartData, isWind }) {
       },
       yaxis: {
         title: {
-          text: "PM1 Values",
+          text: "PM Values",
         },
       },
     };

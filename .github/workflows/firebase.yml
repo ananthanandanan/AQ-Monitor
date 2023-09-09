@@ -24,6 +24,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g npm
+      - name: Set Environment Variable
+        run: echo "REACT_APP_DATASET1_URL=${{ secrets.REACT_APP_DATASET1_URL }}" >> .env
       - name: npm install, build and test
         run: |
           npm install
@@ -52,4 +54,3 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          REACT_APP_DATASET1_URL: ${{ secrets.REACT_APP_DATASET1_URL }}
