@@ -5,36 +5,35 @@ name: Firebase CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main]
+    branches: [main]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [18.x]
-  
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install -g npm
-    - name: npm install, build and test
-      run: |
-        npm install
-        npm run build
-    - name: Archive Build
-      uses: actions/upload-artifact@v2
-      with:
-        name: build
-        path: build
-        
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install -g npm
+      - name: npm install, build and test
+        run: |
+          npm install
+          npm run build
+      - name: Archive Build
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+
   deploy:
     name: Deploy
     needs: build
@@ -53,3 +52,4 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          REACT_APP_DATASET1_URL: ${{ secrets.REACT_APP_DATASET1_URL }}
