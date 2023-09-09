@@ -1,6 +1,6 @@
 // Showing a line graph of wind speed and direction
 // Show the date and day of the week.
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../components/Header";
@@ -8,21 +8,35 @@ import ChartCard from "../components/ChartCard";
 
 import Filters from "../components/Filters";
 import { praanActions } from "../store/praan-slice";
+import VisualChart from "../components/VisualChart";
 
 function WindyView() {
   const dispatch = useDispatch();
   const [date, setDate] = useState();
   const { data: praanData } = useSelector((state) => state.praan.praanModel);
   const timeValues = useSelector((state) => state.praan.filteredTimes);
+  const [windData, setWindData] = useState({
+    x: [],
+    y: [],
+  });
 
-  let windData = [];
-
-  const calWindData = () => {
+  useEffect(() => {
     if (!date) {
       return;
     }
+
     let filteredData = [];
     let days = new Set();
+    let dayStrings = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    let dayOrder = [];
 
     timeValues.forEach((item) => {
       const { time: itemTime } = item;
@@ -31,6 +45,7 @@ function WindyView() {
     });
     days.forEach((day) => {
       let y = [];
+      dayOrder.push(dayStrings[day]);
       timeValues.forEach((item) => {
         const { time: itemTime, key } = item;
         let time = new Date(itemTime);
@@ -38,19 +53,14 @@ function WindyView() {
           y.push(parseInt(praanData[key].speed));
         }
       });
-      console.log(y);
       y = Math.max(...y);
-      console.log(y);
-      filteredData.push({
-        x: day,
-        y,
-      });
+      filteredData.push(y);
     });
-
-    return filteredData;
-  };
-
-  windData = calWindData();
+    setWindData({
+      x: dayOrder,
+      y: filteredData,
+    });
+  }, [date, timeValues, praanData]);
   const onFilterDate = (date) => {
     let endDate = date.date;
     let startDate = new Date(date.date.toDateString());
@@ -69,21 +79,6 @@ function WindyView() {
     );
   };
 
-  // console.log(calculateMaxWindyDay());
-
-  const maxDay = (windData) => {
-    let day = 0;
-    let wind = 0;
-    windData.forEach((item) => {
-      if (item.y > wind) {
-        wind = item.y;
-        day = item.x;
-      }
-    });
-
-    return day;
-  };
-
   return (
     <>
       <Header title="Overlay View">
@@ -95,13 +90,13 @@ function WindyView() {
         />
       </Header>
       <main>
-        <ChartCard
-          title="Wind Card"
-          startDate={date.startDate}
-          endDate={date.endDate}
-          getMaxDay={maxDay}
-          data={windData}
-        />
+        <ChartCard title="Wind Card">
+          {date ? (
+            <VisualChart isWind chartData={windData} />
+          ) : (
+            <h1>Enter a valid Date</h1>
+          )}
+        </ChartCard>
       </main>
     </>
   );

@@ -1,44 +1,39 @@
-import React from "react";
 import Chart from "react-apexcharts";
 import { useMantineColorScheme } from "@mantine/core";
-
-import styles from "./VisualChart.module.css";
 
 function VisualChart({ chartData, isWind }) {
   const { colorScheme } = useMantineColorScheme();
   const isDark = colorScheme === "dark";
   let options = {};
   let data = [];
+  let type = "";
+
   if (isWind) {
     options = {
       chart: {
         type: "bar",
         stacked: false,
       },
+      theme: {
+        mode: isDark ? "dark" : "light",
+        palette: "palette1",
+      },
       xaxis: {
         categories: chartData.x,
       },
-      yaxis: {
-        title: {
-          text: "Wind Speed",
-        },
+    };
+    type = "bar";
+    data = [
+      {
+        name: "Wind Speed",
+        data: chartData.y,
       },
-    };
-    data = {
-      name: "Wind Speed",
-      data: chartData.y,
-    };
+    ];
   } else {
     options = {
       theme: {
         mode: isDark ? "dark" : "light",
         palette: "palette1",
-        monochrome: {
-          enabled: false,
-          color: "#255aee",
-          shadeTo: "light",
-          shadeIntensity: 0.65,
-        },
       },
       chart: {
         type: "line",
@@ -60,20 +55,18 @@ function VisualChart({ chartData, isWind }) {
         },
       },
     };
+    type = "line";
     data = chartData;
   }
 
   return (
-    <div className={styles["container"]}>
-      {/* Chart */}
-      <Chart
-        options={options}
-        series={data}
-        type="line"
-        width="850"
-        height="550"
-      />
-    </div>
+    <Chart
+      options={options}
+      type={type}
+      series={data}
+      width="850"
+      height="500"
+    />
   );
 }
 
