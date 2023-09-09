@@ -2,12 +2,7 @@ import { Switch, useMantineColorScheme } from "@mantine/core";
 
 import styles from "./SideNav.module.css";
 import MantineThemeButton from "./MantineThemeButton";
-import {
-  IconChartArea,
-  IconChartLine,
-  IconWind,
-  IconTable,
-} from "@tabler/icons-react";
+import { IconChartArea, IconChartLine } from "@tabler/icons-react";
 
 function SideNav({ toggleView, isActive, toggleDataset }) {
   const { colorScheme } = useMantineColorScheme();

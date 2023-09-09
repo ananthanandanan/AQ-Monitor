@@ -1,6 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react"; // Add useEffect and useState
-import { useSelector } from "react-redux";
 import Chart from "react-apexcharts";
 
 import styles from "./VisualChart.module.css";

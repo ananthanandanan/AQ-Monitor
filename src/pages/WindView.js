@@ -7,10 +7,7 @@ import Header from "../components/Header";
 import ChartCard from "../components/ChartCard";
 
 import Filters from "../components/Filters";
-import VisualChart from "../components/VisualChart";
 import { praanActions } from "../store/praan-slice";
-import WindyChart from "../components/WindyChart";
-import { max } from "date-fns";
 
 function WindyView() {
   const dispatch = useDispatch();
@@ -28,7 +25,7 @@ function WindyView() {
     let days = new Set();
 
     timeValues.forEach((item) => {
-      const { time: itemTime, key } = item;
+      const { time: itemTime } = item;
       let time = new Date(itemTime);
       days.add(time.getDay());
     });
