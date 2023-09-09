@@ -1,5 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * This slice is responsible for storing the data related to the praan model
+ * @name praanSlice
+ * @memberOf store
+ * @property {Object} praanModel - The praan model data
+ * @property {Array} praanModel.uniqueDevices - The unique devices
+ * @property {Array} praanModel.timeData - The time data
+ * @property {Array} praanModel.deviceData - The device data
+ * @property {Array} praanModel.data - The data
+ * @property {Array} filteredTimes - The filtered times
+ * @property {Array} filteredDevices - The filtered devices
+ * @property {function} fetchPraanData - Function to fetch the praan data
+ * @property {function} filterWithTime - Function to filter the data with time
+ * @property {function} filterWeek - Function to filter the data with week
+ * @property {function} clearFilter - Function to clear the filter
+ **/
+
 const praanSlice = createSlice({
   name: "praan",
   initialState: {
@@ -44,6 +61,7 @@ const praanSlice = createSlice({
       state.filteredDevices = deviceData;
       state.filteredTimes = timeData;
     },
+    // Filter the data based on the date and time selected
     filterWithTime(state, action) {
       const type = action.payload.type;
       const updatedTimes = [];

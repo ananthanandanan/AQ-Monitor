@@ -1,16 +1,18 @@
 # AQ-Monitor: Air Quality Monitoring Dashboard 🌬️📊
 
-AQ-Monitor is a data visualization dashboard built using **ReactJS**, **Mantine**, **ApexCharts**, and **Redux Toolkit** to monitor air quality data collected from Praan devices installed in the real world. This dashboard provides an intuitive interface to analyze and explore air quality measurements, including PM1, PM2.5, and PM10 particle concentrations, wind speed.
+AQ-Monitor is a data visualization dashboard built using **ReactJS**, **Mantine**, **ApexCharts**, and **Redux Toolkit** to monitor air quality data collected from Praan devices installed in the real world. This dashboard provides an intuitive interface to analyze and explore air quality measurements, including PM1, PM2.5, and PM10 particle concentrations, windiest day of a week given the date.
 
 ## Features 🚀
 
-- **Location Comparison:** Compare air quality data from three different locations throughout the day, including separate visualizations for PM1, PM2.5, and PM10 values.
+- **Location Comparison:** Compare air quality data from three different locations(devices) throughout the day, including separate visualizations for PM1, PM2.5, and PM10 values.
 
 - **Time-Range Filtering:** Easily filter and focus on specific time ranges within the dataset to identify trends or patterns.
 
 - **Time-Series Graph:** View a time-series graph that overlays PM readings (PM1, PM2.5, and PM10) on top of each other for comprehensive analysis.
 
 - **Dark Mode:** Toggle between light and dark modes for comfortable viewing in different lighting environments.
+
+- **Windy Days Analysis:** Identify and display the most windy days of the week given the date.
 
 - **Dataset Switching:** Switch between different datasets to view the same data in different ways.
 
@@ -36,13 +38,19 @@ AQ-Monitor is a data visualization dashboard built using **ReactJS**, **Mantine*
     npm install
    ```
 
-4. Start the development server:
+4. Set up the environment variables:
+
+   ```bash
+    cp .env.example .env
+   ```
+
+5. Start the development server:
 
    ```bash
     npm start
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+6. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Data Sources 📊
 
