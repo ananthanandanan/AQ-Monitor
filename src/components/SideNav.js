@@ -9,7 +9,7 @@ import {
   IconTable,
 } from "@tabler/icons-react";
 
-function SideNav({ toggleView, isActive }) {
+function SideNav({ toggleView, isActive, toggleDataset }) {
   const { colorScheme } = useMantineColorScheme();
 
   return (
@@ -42,24 +42,6 @@ function SideNav({ toggleView, isActive }) {
               <IconChartLine />
               Overlay
             </li>
-            <li
-              onClick={() => {
-                toggleView("Wind");
-              }}
-              className={isActive === "Wind" ? styles.active : ""}
-            >
-              <IconWind />
-              Wind
-            </li>
-            <li
-              onClick={() => {
-                toggleView("Table");
-              }}
-              className={isActive === "Table" ? styles.active : ""}
-            >
-              <IconTable />
-              Table
-            </li>
           </ul>
         </div>
         <div className={styles["bottom-items"]}>
@@ -69,6 +51,7 @@ function SideNav({ toggleView, isActive }) {
               onLabel="1"
               offLabel="2"
               size="md"
+              onClick={toggleDataset}
             />
             <p>Dataset</p>
           </div>
