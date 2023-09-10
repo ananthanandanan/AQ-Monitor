@@ -16,14 +16,15 @@ import VisualChart from "../components/VisualChart";
  * @returns {JSX.Element}
  *
  */
-function WindyView() {
+function WindyView({ toggleDataset }) {
   const dispatch = useDispatch();
-  const [date, setDate] = useState();
+  const date = useSelector((state) => state.praan.windDate);
   const { data: praanData } = useSelector((state) => state.praan.praanModel);
   const timeValues = useSelector((state) => state.praan.filteredTimes);
   const [windData, setWindData] = useState({
     x: [],
     y: [],
+    maxDay: "",
   });
 
   useEffect(() => {
@@ -56,26 +57,37 @@ function WindyView() {
         const { time: itemTime, key } = item;
         let time = new Date(itemTime);
         if (time.getDay() === day) {
-          y.push(parseInt(praanData[key].speed));
+          y.push({ dayIndex: day, speed: parseInt(praanData[key].speed) });
         }
       });
-      y = Math.max(...y);
-      filteredData.push(y);
+
+      console.log(y);
+      filteredData.push(
+        y.reduce((acc, cur) => (acc.speed > cur.speed ? acc : cur), {
+          dayIndex: -1,
+          speed: -1,
+        })
+      );
     });
+
+    let maxDayIndex = filteredData.reduce(
+      (acc, cur) => (acc.speed > cur.speed ? acc : cur),
+      {
+        dayIndex: -1,
+        speed: -1,
+      }
+    ).dayIndex;
+
     setWindData({
+      maxDay: dayStrings[maxDayIndex],
       x: dayOrder,
-      y: filteredData,
+      y: filteredData.map((item) => item.speed),
     });
   }, [date, timeValues, praanData]);
   const onFilterDate = (date) => {
     let endDate = date.date;
     let startDate = new Date(date.date.toDateString());
     startDate.setDate(endDate.getDate() - 6);
-
-    setDate({
-      startDate,
-      endDate,
-    });
 
     dispatch(
       praanActions.filterWeek({
@@ -84,15 +96,19 @@ function WindyView() {
       })
     );
   };
-
+  // Clear the filter
+  const onClearHandler = () => {
+    dispatch(praanActions.clearFilter());
+  };
   return (
     <>
-      <Header title="Overlay View">
+      <Header title="Wind View">
         <Filters
           filterDate
           isWeekly
           onFilter={onFilterDate}
-          // onClear={onClearHandler}
+          onClear={onClearHandler}
+          toggleDataset={toggleDataset}
         />
       </Header>
       <main>

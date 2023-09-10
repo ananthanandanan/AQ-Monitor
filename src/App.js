@@ -33,6 +33,7 @@ function App() {
     } else {
       setDataset("praan-1");
     }
+    dispatch(praanActions.clearFilter());
   };
 
   return (

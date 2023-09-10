@@ -69,13 +69,21 @@ function VisualChart({ chartData, isWind }) {
   }
 
   return (
-    <Chart
-      options={options}
-      type={type}
-      series={data}
-      width="850"
-      height="500"
-    />
+    <>
+      <Chart
+        options={options}
+        type={type}
+        series={data}
+        width="850"
+        height="500"
+      />
+      {isWind && (
+        <h2 style={{ width: "100%", textAlign: "center" }}>
+          {" "}
+          The windiest day of the week is {chartData.maxDay}
+        </h2>
+      )}
+    </>
   );
 }
 

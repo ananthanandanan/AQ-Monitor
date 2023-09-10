@@ -59,10 +59,13 @@ function Filters({ filterTime, filterDate, onFilter, onClear, isWeekly }) {
   };
 
   const onClearTimeFilter = () => {
+    onClear();
     setDateValue(null);
+    if (isWeekly) {
+      return;
+    }
     startTimeInputRef.current.value = null;
     endTimeInputRef.current.value = null;
-    onClear();
   };
   return (
     <>

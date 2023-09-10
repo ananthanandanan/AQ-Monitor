@@ -15,6 +15,7 @@ import { createSlice } from "@reduxjs/toolkit";
  * @property {function} filterWithTime - Function to filter the data with time
  * @property {function} filterWeek - Function to filter the data with week
  * @property {function} clearFilter - Function to clear the filter
+ * @property {Object} windDate - The day of the week, that is windiest
  **/
 
 const praanSlice = createSlice({
@@ -28,6 +29,7 @@ const praanSlice = createSlice({
     },
     filteredTimes: [],
     filteredDevices: [],
+    windDate: null,
   },
   reducers: {
     fetchPraanData(state, action) {
@@ -111,10 +113,12 @@ const praanSlice = createSlice({
 
       state.filteredTimes = updatedTimes;
       state.filteredDevices = updatedDevices;
+      state.windDate = startDate;
     },
     clearFilter(state, action) {
       state.filteredTimes = state.praanModel.timeData;
       state.filteredDevices = state.praanModel.deviceData;
+      state.windDate = null;
     },
   },
 });
